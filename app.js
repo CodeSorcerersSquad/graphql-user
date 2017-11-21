@@ -1,22 +1,15 @@
 'use strict';
 
-var express = require('express');
-var graphqlHTTP = require('express-graphql');
-var { buildSchema } = require('graphql');
-
+const express = require('express');
 var app = express();
+
+// Log Middleware
+app.use(require('./middlewares/log'))
 
 // Configure database connection
 require('./db/connection')(app);
 
-// Construct a schema, using GraphQL schema language
-var schema = require('./schema/main')(app);
-
-app.use('/users', graphqlHTTP({
-  schema: schema,
-  pretty: true,
-  graphiql: true
-}));
-
+// Constrollers
+app.use(require('./controllers/user')(app));
 app.listen(4000);
 console.log('Running a GraphQL API server at localhost:4000/users');

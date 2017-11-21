@@ -1,8 +1,7 @@
 'use strict';
 
-const graphql = require('graphql')
-const users = require('./users.json')
-let userType = require('./user')
+const graphql = require('graphql');
+let userType = require('./user');
 
 /**
 * Main GraphQL Schema
