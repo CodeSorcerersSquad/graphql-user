@@ -19,7 +19,8 @@ module.exports = (app) => {
         bufferMaxEntries: 0
     };
 
-    mongoose.connect('mongodb://localhost:27017/graph-user-db', options);
+    const uri = 'mongodb://localhost:27017/graph-user-db';
+    mongoose.connect(uri, options);
 
     mongoose.connection.on('connected', function () {
         console.log(`Mongoose default connection connected to "${uri}"`);

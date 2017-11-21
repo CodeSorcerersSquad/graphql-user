@@ -5,7 +5,7 @@ let knowledgeType = require('./knowledge');
 module.exports = new graphql.GraphQLObjectType({
     name: 'User',
     fields: {
-      id: { type: new graphql.GraphQLNonNull(graphql.GraphQLInt) },
+      _id: { type: new graphql.GraphQLNonNull(graphql.GraphQLString) },
       name: { type: new graphql.GraphQLNonNull(graphql.GraphQLString) },
       full_name: { type: graphql.GraphQLString },
       age: { type: graphql.GraphQLInt },
