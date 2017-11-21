@@ -47,6 +47,15 @@ npm start
 ```
 
 #### Build With Docker
+To build this project as docker image:
+```bash
+docker build -t <your username>/node-graphql-users
+```
+
+To run this docker image:
+```bash
+docker run -p 49160:8080 -d <your username>/node-graphql-users
+```
 
 
 ## GraphiQL
