@@ -1,11 +1,17 @@
+'use strict';
+
 var express = require('express');
 var graphqlHTTP = require('express-graphql');
 var { buildSchema } = require('graphql');
 
-// Construct a schema, using GraphQL schema language
-var schema = require('./schema/main')
-
 var app = express();
+
+// Configure database connection
+require('./db/connection')(app);
+
+// Construct a schema, using GraphQL schema language
+var schema = require('./schema/main')(app);
+
 app.use('/users', graphqlHTTP({
   schema: schema,
   pretty: true,
