@@ -20,4 +20,7 @@ const wistonMiddleware = expressWinston.logger({
   ignoreRoute: function (req, res) { return false; } // optional: allows to skip some log messages based on request and/or response
 });
 
+/**
+ * Custom Wiston Express Middleware to log all requests and responses in the console.
+ */
 module.exports = wistonMiddleware;
