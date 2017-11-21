@@ -54,7 +54,7 @@ docker build -t <your username>/node-graphql-users
 
 To run this docker image:
 ```bash
-docker run -p 49160:8080 -d <your username>/node-graphql-users
+docker run -p 49160:4000 -d <your username>/node-graphql-users
 ```
 
 
@@ -86,6 +86,19 @@ Request:
     }
   }
 }
+```
+
+cURL Request:
+```bash
+curl -X POST \
+  http://localhost:4000/users \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/json' \
+  -H 'postman-token: 6e7020b6-0385-972d-fdd2-38b3f53bfc8f' \
+  -d '{
+	"query": "{users {_id name full_name age city tag url knowledge {language frameworks}}}"
+}
+'
 ```
 
 Response:
@@ -207,6 +220,18 @@ Request:
   }
 }
 ```
+cURL Request:
+```bash
+curl -X POST \
+  http://localhost:4000/users \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/json' \
+  -H 'postman-token: 99895cc1-c5f0-0d5f-4b3e-0f50a8e87c7f' \
+  -d '{
+	"query": "{users(_id: \"5a147016aadc0bed1789907e\") {_id name full_name age city tag url knowledge {language frameworks}}}"
+}
+'
+```
 
 Response:
 ```json
@@ -246,3 +271,6 @@ Response:
   }
 }
 ```
+
+### Postman Collection
+For testing see this [Postman Collection](https://www.getpostman.com/collections/b1d2834fe981335daf41)
