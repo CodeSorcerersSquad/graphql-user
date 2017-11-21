@@ -1,0 +1,31 @@
+{
+  "name": "graphql-api-user",
+  "version": "1.0.0",
+  "description": "GraphQL API for User resource.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start-mon": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeSorcerersSquad/graphql-user.git"
+  },
+  "keywords": [
+    "graphql",
+    "user",
+    "api"
+  ],
+  "author": "CodeSorcerersSquad <https://github.com/CodeSorcerersSquad>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/CodeSorcerersSquad/graphql-user/issues"
+  },
+  "homepage": "https://github.com/CodeSorcerersSquad/graphql-user#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "express-graphql": "^0.6.11",
+    "graphql": "^0.11.7"
+  }
+}
