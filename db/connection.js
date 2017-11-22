@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
  */
 module.exports = (app) => {
 
-    let options = {
+    const options = {
         useMongoClient: true,
         autoIndex: false, // Don't build indexes
         reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
