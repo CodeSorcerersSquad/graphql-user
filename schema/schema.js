@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Main GraphQL Schema
  * @param {object} app express object.

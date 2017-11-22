@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * User model. This module provides functions to access the user information.
  * The user information is persisted in an MongoDB Colletion.
@@ -10,7 +8,8 @@ module.exports = function(app) {
     // Database connection
     const mongoose = app.get('mongoose');
     const db = mongoose.connection;
-    const users = db.collection('users');   
+    const users = db.collection('users');
+    const {GraphQLError} = require('graphql');
 
     let module = {};
 
@@ -30,13 +29,19 @@ module.exports = function(app) {
      * @param {string} _id the user identifiier. If it´s not provide list all users.
      * @returns {array} List all users async.
      */
-    module.getUsers = async (_, {_id}) => {
+    module.getUsers = async ({_id}) => {
         let query = {};
+        console.log(_id);
         if (_id) {
             query._id = mongoose.Types.ObjectId(_id);
         }
-
-        return (await users.find(query).toArray()).map(prepare);
+        console.log(query);
+        try {
+            return (await users.find(query).toArray()).map(prepare);
+        } catch (err) {
+            return new GraphQLError(`Error: ${err}`);
+        }
+        
     };
 
     /**
@@ -45,10 +50,14 @@ module.exports = function(app) {
      * @param {string} _id the user identifiier. If it´s not provide list all users.
      * @return {object} The user returned async.
      */
-    module.getUserById = async (_, {_id}) => {
-        return prepare(await uses.findOne(mongoose.Types.ObjectId(_id)));
+    module.getUserById = async ({_id}) => {
+        try {
+            return prepare(await uses.findOne(mongoose.Types.ObjectId(_id)));
+        } catch (err) {
+            return new GraphQLError(`Error: ${err}`);
+        }
     };
-
+            
     return module;
 };
 

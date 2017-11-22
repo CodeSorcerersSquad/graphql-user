@@ -1,9 +1,9 @@
 type Query{
-    users(_id: String): [User]
+    users(_id: ID): [User]
 }
 
 type User {
-    _id: String!
+    _id: ID!
     name: String!
     full_name: String
     age: Int
