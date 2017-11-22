@@ -9,6 +9,7 @@ module.exports = function (app) {
 
 	var module = {};
 	module.users = userModel.getUsers;
+	module.users_name = userModel.getUserByName;
 
 	return module;
 }
