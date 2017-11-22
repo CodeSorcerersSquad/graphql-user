@@ -31,7 +31,6 @@ module.exports = function(app) {
      */
     module.getUsers = async ({_id, name}) => {
         let query = {};
-        console.log(_id);
         
         if (_id) {
             query._id = mongoose.Types.ObjectId(_id);

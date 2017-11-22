@@ -7,7 +7,8 @@
     "start": "node app.js",
     "start-mon": "nodemon app.js",
     "code-check": "eslint ./",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test/**/*.test.js",
+    "coverage": "nyc --reporter=html --reporter=text mocha test/**/*.test.js"
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,9 @@
   },
   "devDependencies": {
     "babel-eslint": "^8.0.2",
-    "eslint": "^4.11.0"
+    "eslint": "^4.11.0",
+    "mocha": "^4.0.1",
+    "nyc": "^11.3.0",
+    "should": "^13.1.3"
   }
 }
