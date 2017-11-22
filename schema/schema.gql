@@ -1,6 +1,5 @@
 type Query{
-    users(_id: ID): [User]
-    users_name(name: String): [User]
+    users(_id: ID, name: String): [User]
 }
 
 type User {
