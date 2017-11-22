@@ -57,7 +57,25 @@ module.exports = function(app) {
             return new GraphQLError(`Error: ${err}`);
         }
     };
-            
+       
+    /**
+     * Find an user by his name.
+     * @param {object} _ the root object from graphql. It´s not used. 
+     * @param {string} name the user name. If it´s not provide list all users.
+     * @return {object} The user returned async.
+     */
+    module.getUserByName = async ({name}) => {
+        let query = {};
+        console.log(name);
+        if (!name) {
+            return (await users.find(query).toArray()).map(prepare);
+        }
+        try {
+            return (await users.find({"name" : name}).toArray()).map(prepare);
+        } catch (err) {
+            return new GraphQLError('Error: ${err}');
+        }
+    };
     return module;
 };
 
