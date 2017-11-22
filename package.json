@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "start-mon": "nodemon app.js",
+    "code-check": "eslint ./",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -32,6 +33,7 @@
     "winston": "^2.4.0"
   },
   "devDependencies": {
+    "babel-eslint": "^8.0.2",
     "eslint": "^4.11.0"
   }
 }

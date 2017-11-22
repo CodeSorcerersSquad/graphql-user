@@ -3,8 +3,12 @@
 This component implements a User API using the GraphQL to provide this information.
 
 The User Schema is defined as:
-```
-User {
+```gql
+type Query{
+    users(_id: String): [User]
+}
+
+type User {
     _id: String!
     name: String!
     full_name: String
@@ -12,11 +16,14 @@ User {
     city: String
     tag: String
     url: String
-    knowledge: [
-        language: String
-        frameworks: [String]
-    ]
+    knowledge: [Knowledge]
 }
+
+type Knowledge {
+    language: String
+    frameworks: [String]
+}
+
 ```
 
 For more information about GraphQL see the [oficial site](http://graphql.org/learn/).
