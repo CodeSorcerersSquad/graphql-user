@@ -1,4 +1,9 @@
 /**
+ * @file User Model
+ * @author @rmzoni
+ * @since 2017-11-21
+ */
+/**
  * User model. This module provides functions to access the user information.
  * The user information is persisted in an MongoDB Colletion.
  * @param {object} app - Express object.
@@ -8,20 +13,10 @@ module.exports = function(app) {
     // Database connection
     const mongoose = app.get('mongoose');
     const db = mongoose.connection;
-    const users = db.collection('users');
+    const utils = require('../db/mongo-utils')(db);
     const {GraphQLError} = require('graphql');
 
     let module = {};
-
-    /**
-     * @private
-     * User transformation to be compliance with GraphQL User Schema
-     * @param {object} user - the user raw object
-     */
-    function prepare(user) {
-        user._id = user._id.toString();
-        return user;
-    };
 
     /**
      * List all users if the identifier is not provided.
@@ -33,7 +28,7 @@ module.exports = function(app) {
         let query = {};
         
         if (_id) {
-            query._id = mongoose.Types.ObjectId(_id);
+            query._id = _id;
         }
         
         if (name) {
@@ -41,7 +36,7 @@ module.exports = function(app) {
         }
 
         try {
-            return (await users.find(query).toArray()).map(prepare);
+            return await utils.scan('users', query);
         } catch (err) {
             return new GraphQLError(`Error: ${err}`);
         }
@@ -56,7 +51,7 @@ module.exports = function(app) {
      */
     module.getUserById = async ({_id}) => {
         try {
-            return prepare(await uses.findOne(mongoose.Types.ObjectId(_id)));
+            return await utils.find('users', _id);
         } catch (err) {
             return new GraphQLError(`Error: ${err}`);
         }

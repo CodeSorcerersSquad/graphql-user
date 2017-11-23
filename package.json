@@ -30,6 +30,7 @@
     "express-graphql": "^0.6.11",
     "express-winston": "^2.4.0",
     "graphql": "^0.11.7",
+    "mongodb": "^2.2.33",
     "mongoose": "^4.13.4",
     "winston": "^2.4.0"
   },

@@ -1,3 +1,8 @@
+/**
+ * @file User Middleware for an GraphQL Http Route
+ * @author @rmzoni
+ * @since 2017-11-21
+ */
 const express = require('express');
 const router = express.Router();
 const {buildSchema} = require('graphql');
@@ -21,7 +26,7 @@ module.exports = function (app) {
         schema: schema,
         rootValue: schemaImpl,
         pretty: true,
-        graphiql: true
+        graphiql: (process.env.NODE_ENV !== 'production')
     }));
 
     return router;
