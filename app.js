@@ -2,7 +2,7 @@ const express = require('express');
 var app = express();
 
 // Log Middleware
-app.use(require('./middlewares/log'))
+app.use(require('./middlewares/log'));
 
 // Configure database connection
 require('./db/connection')(app);

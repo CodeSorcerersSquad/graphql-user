@@ -5,10 +5,11 @@
  */
 module.exports = function (app) {
 
-	const userModel = require('../model/user')(app);
+    const userModel = require('../model/user')(app);
 
-	var module = {};
-	module.users = userModel.getUsers;
+    var module = {};
+    module.users = userModel.getUsers;
 
-	return module;
-}
+    return module;
+
+};

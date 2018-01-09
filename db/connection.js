@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 /**
 * MongoDB connection factory module.
 * @param {object} serverExpress express object.
-* @return {void} 
+* @return {void}
  */
 module.exports = (app) => {
 
@@ -35,4 +35,4 @@ module.exports = (app) => {
 
     app.set('mongoose', mongoose);
 
-}
+};

@@ -20,17 +20,17 @@ module.exports = function(app) {
 
     /**
      * List all users if the identifier is not provided.
-     * @param {object} _ the root object from graphql. It´s not used. 
+     * @param {object} _ the root object from graphql. It´s not used.
      * @param {string} _id the user identifiier. If it´s not provide list all users.
      * @returns {array} List all users async.
      */
     module.getUsers = async ({_id, name}) => {
         let query = {};
-        
+
         if (_id) {
             query._id = _id;
         }
-        
+
         if (name) {
             query.name = name;
         }
@@ -40,12 +40,12 @@ module.exports = function(app) {
         } catch (err) {
             return new GraphQLError(`Error: ${err}`);
         }
-        
+
     };
 
     /**
      * Find an user by his identifier.
-     * @param {object} _ the root object from graphql. It´s not used. 
+     * @param {object} _ the root object from graphql. It´s not used.
      * @param {string} _id the user identifiier. If it´s not provide list all users.
      * @return {object} The user returned async.
      */
@@ -56,8 +56,7 @@ module.exports = function(app) {
             return new GraphQLError(`Error: ${err}`);
         }
     };
-       
-    
+
     return module;
 };
 

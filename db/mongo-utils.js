@@ -10,7 +10,7 @@ module.exports = (db) => {
     /**
      * Vaidar ID.
      * @param {string} id
-     * @return {boolean} 'true' o ID é valido. 
+     * @return {boolean} 'true' o ID é valido.
      */
     function isValidID(id) {
         const idRegex = new RegExp('^[0-9a-f]{24}$', 'g');
@@ -131,7 +131,8 @@ module.exports = (db) => {
      */
     async function update(collection, _id, set) {
 
-        const query = {}, update = {};
+        const query = {};
+        const update = {};
 
         return new Promise((resolve, reject) => {
 
@@ -163,5 +164,5 @@ module.exports = (db) => {
         remove,
         insert,
         update
-    }
-}
+    };
+};

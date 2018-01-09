@@ -12,16 +12,16 @@ describe('User Model - Unit Test', async() => {
                             return {
                                 toArray: () => {
                                     return new Promise((resolve) => {
-                                        resolve(usersMock)
+                                        resolve(usersMock);
                                     });
                                 }
-                            }
+                            };
                         }
                     };
                 }
             }
-        }
-    }
+        };
+    };
 
     it('should return 1 item by getUsers', async() => {
         var app = express();
