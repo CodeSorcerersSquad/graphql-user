@@ -19,9 +19,37 @@ module.exports = function(app) {
     let module = {};
 
     /**
+     * Create a new user
+     * @param {object} user the user object to be created
+     * @returns {object} The created user
+     */
+    module.createUser = async ({user}) => {
+        try {
+            return await utils.insert('users', user);
+        } catch (err) {
+            return new GraphQLError(`Error: ${err}`);
+        }
+    };
+
+    /**
+     * Update a existing user
+     * @param {string} _id the user identifier
+     * @param {object} user the user object to be created
+     * @returns {object} The updated user
+     */
+    module.updateUser = async ({_id, user}) => {
+        try {
+            await utils.update('users', _id, user);
+            return await utils.find('users', _id);
+        } catch (err) {
+            return new GraphQLError(`Error: ${err}`);
+        }
+    };
+
+    /**
      * List all users if the identifier is not provided.
-     * @param {object} _ the root object from graphql. It´s not used.
      * @param {string} _id the user identifiier. If it´s not provide list all users.
+     * @param {string} name the user name for a like comparsion. If it´s not provide list all users.
      * @returns {array} List all users async.
      */
     module.getUsers = async ({_id, name}) => {
@@ -32,7 +60,7 @@ module.exports = function(app) {
         }
 
         if (name) {
-            query.name = name;
+            query.name = new RegExp(`.*${name}.*`);
         }
 
         try {
@@ -42,6 +70,7 @@ module.exports = function(app) {
         }
 
     };
+
 
     /**
      * Find an user by his identifier.

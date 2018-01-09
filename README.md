@@ -4,12 +4,17 @@ This component implements a User API using the GraphQL to provide this informati
 
 The User Schema is defined as:
 ```gql
-type Query{
-    users(_id: String): [User]
+type Query {
+    users(_id: ID, name: String): [User]
+}
+
+type Mutation {
+    createUser(user: UserInput!): User
+    updateUser(_id: ID!, user: UserInput!): User
 }
 
 type User {
-    _id: String!
+    _id: ID!
     name: String!
     full_name: String
     age: Int
@@ -24,6 +29,20 @@ type Knowledge {
     frameworks: [String]
 }
 
+input UserInput {
+    name: String!
+    full_name: String
+    age: Int
+    city: String
+    tag: String
+    url: String
+    knowledge: [KnowledgeInput]
+}
+
+input KnowledgeInput {
+    language: String
+    frameworks: [String]
+}
 ```
 
 For more information about GraphQL see the [oficial site](http://graphql.org/learn/).
@@ -276,6 +295,114 @@ Response:
       }
     ]
   }
+}
+```
+
+### Create User
+Request:
+```
+mutation {
+  createUser(user:{
+    name: "Rafael",
+    full_name: "Rafael Manzoni",
+    age: 32,
+    city: "São Paulo",
+    knowledge: [
+      {
+        language: "Java"
+        frameworks: ["Spring Boot", "Apache Camel"]
+      }
+    ]
+  }) {
+    _id
+    name
+    knowledge {
+      language
+      frameworks
+    }
+  }
+}
+```
+cURL Request:
+```bash
+curl -X POST \
+  http://localhost:4000/users \
+  -H 'Cache-Control: no-cache' \
+  -H 'Content-Type: application/json' \
+  -H 'Postman-Token: 969eccd5-b248-0577-d458-09a0981db03a' \
+  -d '{
+	"query": "mutation {   createUser(user:{     name:  \"Rafael\",     full_name:  \"Rafael Manzoni\",     age: 32,     city:  \"São Paulo\",     knowledge: [       {         language:  \"Java\"         frameworks: [ \"Spring Boot\",  \"Apache Camel\"]       }     ]   }) {     _id     name     knowledge {       language       frameworks     }   } }"
+}'
+```
+
+Response:
+```json
+{
+    "data": {
+        "createUser": {
+            "_id": "5a55261562394db480d3f2ad",
+            "name": "Rafael",
+            "knowledge": [
+                {
+                    "language": "Java",
+                    "frameworks": [
+                        "Spring Boot",
+                        "Apache Camel"
+                    ]
+                }
+            ]
+        }
+    }
+}
+```
+
+### Update User
+Request:
+```
+mutation {
+  updateUser(_id:"5a551daaa5fe63802c1fb55d", user:{
+    name: "Rafael2"
+  }) {
+    _id
+    name
+    knowledge {
+      language
+      frameworks
+    }
+  }
+  
+}
+```
+cURL Request:
+```bash
+curl -X POST \
+  http://localhost:4000/users \
+  -H 'Cache-Control: no-cache' \
+  -H 'Content-Type: application/json' \
+  -H 'Postman-Token: b4754b88-4e8f-e155-bf8a-dd48d72ee476' \
+  -d '{
+	"query": "mutation {   updateUser(_id:\"5a551daaa5fe63802c1fb55d\", user:{     name: \"Rafael2\"   }) {     _id     name     knowledge {       language       frameworks     }   }    }"
+}'
+```
+
+Response:
+```json
+{
+    "data": {
+        "updateUser": {
+            "_id": "5a551daaa5fe63802c1fb55d",
+            "name": "Rafael2",
+            "knowledge": [
+                {
+                    "language": "Java",
+                    "frameworks": [
+                        "Spring Boot",
+                        "Apache Camel"
+                    ]
+                }
+            ]
+        }
+    }
 }
 ```
 

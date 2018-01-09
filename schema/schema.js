@@ -9,6 +9,8 @@ module.exports = function (app) {
 
     var module = {};
     module.users = userModel.getUsers;
+    module.createUser = userModel.createUser;
+    module.updateUser = userModel.updateUser;
 
     return module;
 

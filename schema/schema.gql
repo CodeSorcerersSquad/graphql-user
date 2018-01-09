@@ -1,5 +1,10 @@
-type Query{
+type Query {
     users(_id: ID, name: String): [User]
+}
+
+type Mutation {
+    createUser(user: UserInput!): User
+    updateUser(_id: ID!, user: UserInput!): User
 }
 
 type User {
@@ -14,6 +19,21 @@ type User {
 }
 
 type Knowledge {
+    language: String
+    frameworks: [String]
+}
+
+input UserInput {
+    name: String!
+    full_name: String
+    age: Int
+    city: String
+    tag: String
+    url: String
+    knowledge: [KnowledgeInput]
+}
+
+input KnowledgeInput {
     language: String
     frameworks: [String]
 }
